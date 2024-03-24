@@ -6,18 +6,18 @@ import type { FC, MouseEventHandler } from 'react';
 import './FifteenItem.css';
 
 type FifteenItemProps = {
-  i: number;
-  j: number;
+  x: number;
+  y: number;
   text: number;
-  handleClick: (i: number, j: number) => MouseEventHandler;
+  handleClick: (x: number, y: number) => MouseEventHandler;
 };
 
-const FifteenItem: FC<FifteenItemProps> = ({ text, i, j, handleClick }) => {
+const FifteenItem: FC<FifteenItemProps> = ({ text, x, y, handleClick }) => {
   return (
     <div
       className={cnFifteenItem()}
-      style={{ left: j * 80, top: i * 80 }}
-      onClick={handleClick(i, j)}
+      style={{ left: y * 80, top: x * 80 }}
+      onClick={handleClick(x, y)}
     >
       <p>{text ? text : ''}</p>
     </div>

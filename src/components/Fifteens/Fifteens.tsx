@@ -128,7 +128,7 @@ const Fifteens = () => {
     setShuffleNumbers();
 
   }, [win]);
-  
+
   return (
     <div className={cnFifteens()}>
       {win ? (
@@ -138,8 +138,8 @@ const Fifteens = () => {
           item.map((elem, j) => (
             <FifteenItem
               key={i + j}
-              i={i}
-              j={j}
+              x={i}
+              y={j}
               text={elem}
               handleClick={handleClick}
             />
