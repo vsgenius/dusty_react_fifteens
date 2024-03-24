@@ -18,13 +18,17 @@ const Fifteens = () => {
 
   const checkShuffle = (arrayNumber: number[][]) => {
     let countMismatch = 0;
+
     arrayNumber.forEach((column) => {
+
       for (let i = 1; i < column.length; i++) {
         if (column[i] < column[i - 1]) {
           countMismatch += 1;
         }
       }
+
     });
+
     return countMismatch;
   };
 
@@ -32,41 +36,57 @@ const Fifteens = () => {
     const result = [];
     let subRes = [];
     const tempSet = new Set();
+
     while (result.length !== 4) {
+
       const number = Math.floor(Math.random() * 16);
+
       if (!tempSet.has(number)) {
         tempSet.add(number);
         subRes.push(number);
+
         if (subRes.length === 4) {
           result.push(subRes);
           subRes = [];
         }
       }
+
     }
     return result;
   };
 
   const setShuffleNumbers = () => {
+
     while (true) {
+
       const newArrayNumber = shuffleSqrt();
+
       if (checkShuffle(newArrayNumber) % 2 === 0) {
         setItems([...newArrayNumber]);
         return;
       }
+
     }
   };
   const checkWin = () => {
+
     for (let i = 0; i < items.length; i++) {
+
       for (let j = 0; j < items[i].length; j++) {
+
         if (items[i][j] !== WIN_SEQUENCE[i][j]) {
           setWin(false);
           return;
         }
+
       }
+
       setWin(true);
+
       setTimeout(() => {
         setWin(false);
       }, 2000);
+
     }
 
     setShuffleNumbers();
@@ -74,29 +94,41 @@ const Fifteens = () => {
 
   const handleClick = (i: number, j: number) => {
     return () => {
+
       if (i - 1 >= 0 && !items[i - 1][j]) {
         items[i - 1][j] = items[i][j];
         items[i][j] = 0;
+
         setItems([...items]);
+
       } else if (j + 1 < 4 && !items[i][j + 1]) {
         items[i][j + 1] = items[i][j];
         items[i][j] = 0;
+
         setItems([...items]);
+        
       } else if (i + 1 < 4 && !items[i + 1][j]) {
         items[i + 1][j] = items[i][j];
         items[i][j] = 0;
+
         setItems([...items]);
+
       } else if (j - 1 >= 0 && !items[i][j - 1]) {
         items[i][j - 1] = items[i][j];
         items[i][j] = 0;
+
         setItems([...items]);
       }
       checkWin();
     };
   };
+
   useEffect(() => {
+
     setShuffleNumbers();
+
   }, [win]);
+  
   return (
     <div className={cnFifteens()}>
       {win ? (
