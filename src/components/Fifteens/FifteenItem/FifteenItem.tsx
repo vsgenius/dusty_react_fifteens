@@ -5,21 +5,23 @@ import type { FC, MouseEventHandler } from 'react';
 
 import './FifteenItem.css';
 
+const WIDTH_CELL = 80;
+
 type FifteenItemProps = {
   x: number;
   y: number;
   text: number;
-  handleClick: (x: number, y: number) => MouseEventHandler;
+  handleMove: (x: number, y: number) => MouseEventHandler;
 };
 
-const FifteenItem: FC<FifteenItemProps> = ({ text, x, y, handleClick }) => {
+const FifteenItem: FC<FifteenItemProps> = ({ text, x, y, handleMove }) => {
   return (
     <div
       className={cnFifteenItem()}
-      style={{ left: y * 80, top: x * 80 }}
-      onClick={handleClick(x, y)}
+      style={{ left: y * WIDTH_CELL, top: x * WIDTH_CELL }}
+      onClick={handleMove(x, y)}
     >
-      <p>{text ? text : ''}</p>
+      {text !== 0 && <p>{ text }</p>}
     </div>
   );
 };
